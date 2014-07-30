@@ -15,8 +15,8 @@
     @scope.password = ""
 
     @didLogIn = =>
-      parent.postMessage (name: 'logged-in'), @origin
-      @state.go 'loggedIn', @params
+      parent.postMessage (name: 'loggedIn'), @origin
+      @state.go 'logged-in', @params
 
     @failedLogIn = (err) =>
       @scope.error = err
