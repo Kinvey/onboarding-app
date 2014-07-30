@@ -9,8 +9,10 @@
     @params = $stateParams
     @state = $state
     @scope = $scope
+    @origin = $stateParams.origin
 
     @didLogout = =>
+      parent.postMessage (name: 'loggedOut'), @origin
       @state.go 'login', @params
 
     @failedLogout = (err) =>

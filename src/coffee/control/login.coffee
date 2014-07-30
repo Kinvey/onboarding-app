@@ -9,12 +9,14 @@
     @params = $stateParams
     @state = $state
     @scope = $scope
+    @origin = $stateParams.origin
 
     @scope.username = ""
     @scope.password = ""
 
     @didLogIn = =>
-      @state.go 'logged-in', @params
+      parent.postMessage (name: 'logged-in'), @origin
+      @state.go 'loggedIn', @params
 
     @failedLogIn = (err) =>
       @scope.error = err
