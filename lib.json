@@ -1,0 +1,13 @@
+{
+    "js": [
+        "<%= paths.build.base %>/<%= paths.lib.base %>/angular/angular.js",
+        "<%= paths.build.base %>/<%= paths.lib.base %>/angular-ui-router/release/angular-ui-router.js",
+        "<%= paths.build.base %>/<%= paths.lib.base %>/angular-bootstrap/ui-bootstrap-tpls.js"
+    ],
+    "test": [
+        "<%= paths.build.base %>/<%= paths.lib.base %>/angular/angular.js",
+        "<%= paths.build.base %>/<%= paths.lib.base %>/angular-mocks/angular-mocks.js",
+        "<%= paths.build.base %>/<%= paths.lib.base %>/angular-ui-router/release/angular-ui-router.js"
+    ],
+    "css": [ ]
+}
