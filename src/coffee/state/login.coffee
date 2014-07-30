@@ -4,7 +4,7 @@
 .constant 'app.state.login',
 
   name: 'login'
-  url: '/login/?appKey&appSecret&host'
+  url: '/login/?appKey&appSecret&host&origin'
   templateUrl: 'html/login.html'
   controller: 'app.control.login'
 

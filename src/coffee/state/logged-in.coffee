@@ -4,7 +4,7 @@
 .constant 'app.state.logged-in',
 
   name: 'logged-in'
-  url: '/logged-in/?appKey&appSecret&host'
+  url: '/logged-in/?appKey&appSecret&host&origin'
   templateUrl: 'html/logged-in.html'
   controller: 'app.control.logged-in'
 
