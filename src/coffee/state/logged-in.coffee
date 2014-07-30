@@ -4,13 +4,13 @@
 .constant 'app.state.logged-in',
 
   name: 'logged-in'
-  url: '/logged-in/?appKey&appSecret'
+  url: '/logged-in/?appKey&appSecret&host'
   templateUrl: 'html/logged-in.html'
   controller: 'app.control.logged-in'
 
   resolve:
     $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
-      $kinvey.API_ENDPOINT = "https://v3yk1n-kcs.kinvey.com"
+      $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
         appSecret: $stateParams.appSecret

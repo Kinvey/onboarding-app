@@ -4,13 +4,13 @@
 .constant 'app.state.login',
 
   name: 'login'
-  url: '/login/?appKey&appSecret'
+  url: '/login/?appKey&appSecret&host'
   templateUrl: 'html/login.html'
   controller: 'app.control.login'
 
   resolve:
     $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
-      $kinvey.API_ENDPOINT = "https://v3yk1n-kcs.kinvey.com"
+      $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
         appSecret: $stateParams.appSecret
