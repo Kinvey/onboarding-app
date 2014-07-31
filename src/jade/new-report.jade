@@ -1,0 +1,12 @@
+h1 New Report
+form(role=form, ng-submit="save()")
+  .form-group
+    label(for="from") Submitted By
+    input.form-control(ng-model="from", type="text", placeholder="Submitted By")
+  .form-group
+    label(for="amount") Amount
+    input.form-control(ng-model="amount", type="text", placeholder="Amount")
+  .form-group
+    label(for="reason") Reason
+    input.form-control(ng-model="reason", type="text", placeholder="Reason")
+  button.btn.btn-success(type="submit") Save

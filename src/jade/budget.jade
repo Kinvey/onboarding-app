@@ -1,4 +1,9 @@
 h1 Budget
+ul.list-unstyled
+  li(ng-repeat="report in reports")
+    b {{report.from}}:&nbsp;
+    | {{report.amount | currency:"£"}}&nbsp;
+    | for {{report.reason}}
 p(ng-if="budget.underBudget") 
   | You are&nbsp; 
   b.text-success under
