@@ -14,6 +14,7 @@ module.exports = (grunt) ->
       coffee: '**/*.coffee'
       js: '**/*.js'
       jsModules: '**/module.js'
+      stateFiles: '**/state.js'
       css: '**/*.css'
       html: '**/*.html'
       all: '**/*'
@@ -183,6 +184,7 @@ module.exports = (grunt) ->
         src: [
           '<%= paths.build.base %>/<%= paths.build.js %>/app.js'
           '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.jsModules %>'
+          '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.stateFiles %>'
           '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.js %>'
         ]
         dest: '<%= paths.build.base %>/index.html'
@@ -199,7 +201,7 @@ module.exports = (grunt) ->
     html2js:
       options:
         base: '<%= paths.min.base %>'
-        module: 'app.templates'
+        module: 'templates'
       app:
         src: [
           '<%= paths.min.base %>/<%= paths.build.html %>/<%= matchers.html %>'

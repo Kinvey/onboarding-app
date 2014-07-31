@@ -1,12 +1,9 @@
-(ng = angular)
-
-.module 'app.state'
-.constant 'app.state.logged-in',
+class LoggedInState extends State
 
   name: 'logged-in'
   url: '/logged-in/?appKey&appSecret&host&origin'
   templateUrl: 'html/logged-in.html'
-  controller: 'app.control.logged-in'
+  controller: LoggedInCtrl
 
   resolve:
     $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
@@ -15,3 +12,5 @@
         appKey: $stateParams.appKey
         appSecret: $stateParams.appSecret
     ]
+
+new LoggedInState().register 'app'

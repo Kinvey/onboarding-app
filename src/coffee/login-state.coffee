@@ -1,12 +1,9 @@
-(ng = angular)
-
-.module 'app.state'
-.constant 'app.state.login',
+class LoginState extends State
 
   name: 'login'
   url: '/login/?appKey&appSecret&host&origin'
   templateUrl: 'html/login.html'
-  controller: 'app.control.login'
+  controller: LoginCtrl
 
   resolve:
     $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
@@ -17,3 +14,5 @@
       .then ->
         $kinvey.User.logout() if $kinvey.getActiveUser()?
     ]
+
+new LoginState().register 'app'

@@ -1,1 +1,0 @@
-angular.module 'app.control', ['ui.router']
