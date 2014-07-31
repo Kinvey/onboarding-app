@@ -1,15 +1,1 @@
 @import "bootstrap";
-
-@mixin square-sized($size) {
-  height: $size;
-  width: $size;
-}
-
-img.img-hello {
-  $hello-size: 24px;
-  $hello-spacing: 6px;
-
-  @include square-sized($hello-size);
-
-  margin-right: $hello-spacing;
-}

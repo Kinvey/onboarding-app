@@ -1,0 +1,6 @@
+h1 Reports
+ul.list-unstyled
+  li(ng-repeat="report in reports")
+    b {{report.from}}:&nbsp;
+    | {{report.amount | currency:"£"}}&nbsp;
+    | for {{report.reason}}

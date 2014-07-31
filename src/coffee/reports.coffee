@@ -1,0 +1,31 @@
+class ReportsCtrl extends Controller
+
+  @inject '$scope', '$state', '$stateParams', '$kinvey', 'reports'
+
+  initialize: ->
+
+    @$scope.reports = @reports
+
+
+class ReportsState extends State
+
+  name: 'reports'
+  url: '/reports/?appKey&appSecret&host&origin'
+  templateUrl: 'html/reports.html'
+  controller: ReportsCtrl
+
+  resolve:
+    $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
+      $kinvey.API_ENDPOINT = $stateParams.host
+      $kinvey.init
+        appKey: $stateParams.appKey
+        masterSecret: $stateParams.appSecret
+      .then (u) ->
+        u
+    ]
+
+    reports: ['$kinvey', '$k', ($kinvey) ->
+      $kinvey.DataStore.find 'expense-reports'
+    ]
+
+new ReportsState().register 'app'
