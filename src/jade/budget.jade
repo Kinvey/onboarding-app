@@ -1,0 +1,9 @@
+h1 Budget
+p(ng-if="budget.underBudget") 
+  | You are&nbsp; 
+  b.text-success under
+  | &nbsp;budget!
+p(ng-if="!budget.underBudget") 
+  | You are&nbsp; 
+  b.text-danger over
+  | &nbsp;budget!

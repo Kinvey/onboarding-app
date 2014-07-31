@@ -26,8 +26,6 @@ class ReportsState extends State
       $kinvey.init
         appKey: $stateParams.appKey
         masterSecret: $stateParams.appSecret
-      .then (u) ->
-        u
     ]
 
     reports: ['$kinvey', '$k', ($kinvey) ->

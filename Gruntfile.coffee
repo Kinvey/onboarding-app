@@ -14,7 +14,7 @@ module.exports = (grunt) ->
       coffee: '**/*.coffee'
       js: '**/*.js'
       jsModules: '**/module.js'
-      stateFiles: '**/state.js'
+      baseFiles: '**/base*.js'
       css: '**/*.css'
       html: '**/*.html'
       all: '**/*'
@@ -184,7 +184,7 @@ module.exports = (grunt) ->
         src: [
           '<%= paths.build.base %>/<%= paths.build.js %>/app.js'
           '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.jsModules %>'
-          '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.stateFiles %>'
+          '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.baseFiles %>'
           '<%= paths.build.base %>/<%= paths.build.js %>/<%= matchers.js %>'
         ]
         dest: '<%= paths.build.base %>/index.html'
