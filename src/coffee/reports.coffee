@@ -1,10 +1,16 @@
 class ReportsCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', 'reports'
+  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports'
 
   initialize: ->
 
     @$scope.reports = @reports
+
+    @$interval (=>
+      @$kinvey.DataStore.find 'expense-reports'
+      .then (reports) => @$scope.reports = reports
+    ), 2000
+
 
 
 class ReportsState extends State
