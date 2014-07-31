@@ -4,7 +4,7 @@ class LoginCtrl extends Controller
 
   login: (username, password) ->
     @$scope.working = true
-    @$kinvey.User.logout()
+    @$kinvey.User.login username, password
     .then (=> @didLogin()), (error) => @failedLogin error
 
   didLogin: ->
@@ -30,7 +30,7 @@ class LoginState extends State
       $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
-        masterSecret: $stateParams.appSecret
+        appSecret: $stateParams.appSecret
       .then ->
         $kinvey.User.logout() if $kinvey.getActiveUser()?
     ]

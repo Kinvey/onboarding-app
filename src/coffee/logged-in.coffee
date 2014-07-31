@@ -30,7 +30,7 @@ class LoggedInState extends State
       $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
-        masterSecret: $stateParams.appSecret
+        appSecret: $stateParams.appSecret
     ]
 
 new LoggedInState().register 'app'
