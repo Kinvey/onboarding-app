@@ -1,6 +1,9 @@
-h1 Reports
+.oa-header-btn.oa-new-report-btn +
+h1.oa-page-header 
+  | Expense Reports
 ul.list-unstyled
-  li(ng-repeat="report in reports")
-    b {{report.from}}:&nbsp;
-    | {{report.amount | currency:"£"}}&nbsp;
-    | for {{report.reason}}
+  li.oa-report(ng-repeat="report in reports")
+    .from {{report.from}}
+    .amount {{report.amount | currency:"$"}}
+    .separator for
+    .reason {{report.reason}}
