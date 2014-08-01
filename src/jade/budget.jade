@@ -1,9 +1,10 @@
-h1 Budget
+h1.oa-page-header Budget
 ul.list-unstyled
-  li(ng-repeat="report in reports")
-    b {{report.from}}:&nbsp;
-    | {{report.amount | currency:"£"}}&nbsp;
-    | for {{report.reason}}
+  li.oa-report(ng-repeat="report in reports")
+    .from {{report.from}}
+    .amount {{report.amount | currency:"$"}}
+    .separator for
+    .reason {{report.reason}}
 p(ng-if="budget.underBudget") 
   | You are&nbsp; 
   b.text-success under
