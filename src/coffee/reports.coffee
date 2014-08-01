@@ -11,6 +11,9 @@ class ReportsCtrl extends Controller
       .then (reports) => @$scope.reports = reports
     ), 2000
 
+  nu: ->
+    @$state.go 'new-report', @$stateParams
+
 
 
 class ReportsState extends State

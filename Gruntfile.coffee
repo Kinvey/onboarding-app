@@ -273,7 +273,7 @@ module.exports = (grunt) ->
           # livereload: true,
           interrupt: true
 
-  grunt.registerTask 'lint', ['coffeelint:app', 'scsslint:app']
+  grunt.registerTask 'lint', ['coffeelint:app']
   grunt.registerTask 'build', ['clean:build', 'copy:buildLib', 'copy:buildStatic', 'coffee:app', 'jade:app', 'jade:index', 'sass:app', 'clean:temp', 'tags:libjs', 'tags:appjs', 'tags:libcss', 'tags:appcss']
   grunt.registerTask 'test', ['clean:test', 'coffee:test', 'jasmine:app', 'clean:test']
   grunt.registerTask 'min', ['clean:min', 'copy:minLib', 'copy:minStatic', 'html2js:app', 'replace:min', 'useref', 'concat', 'uglify', 'cssmin', 'clean:tempmin']

@@ -15,6 +15,9 @@ class NewReportCtrl extends Controller
     .then =>
       @initialize()
 
+  back: ->
+    @$state.go 'reports', @$stateParams
+
 
 
 class NewReportState extends State
