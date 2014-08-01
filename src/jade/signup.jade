@@ -1,0 +1,12 @@
+.container
+  .col-sm-8.col-sm-offset-2
+    h1 Sign Up
+    form(role=form, ng-submit="signup(username,password)")
+      .form-group
+        label(for="username") Username
+        input.form-control(name="Username", type="text", ng-model="username")
+      .form-group
+        label(for="password") Password
+        input.form-control(name="Password", type="password", ng-model="password")
+      button.btn.btn-success(type="submit") Sign Up
+    p.text-danger {{error.description}}
