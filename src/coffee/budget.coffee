@@ -1,11 +1,10 @@
 class BudgetCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports', 'budget'
+  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports',
 
   initialize: ->
 
     @$scope.reports = @reports
-    @$scope.budget = @budget
 
     @$interval (=>
       @$kinvey.DataStore.find 'expense-reports'
@@ -33,10 +32,6 @@ class BudgetCtrl extends Controller
 
       reports: ['$kinvey', '$k', ($kinvey) ->
         $kinvey.DataStore.find 'expense-reports'
-      ]
-
-      budget: ['$kinvey', '$k', ($kinvey) ->
-        $kinvey.execute 'budget-check'
       ]
 
   new BudgetState().register 'app'
