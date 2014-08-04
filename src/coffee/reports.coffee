@@ -14,6 +14,9 @@ class ReportsCtrl extends Controller
   nu: ->
     @$state.go 'new-report', @$stateParams
 
+  signup: ->
+    @$state.go 'signup', @$stateParams
+
 
 
 class ReportsState extends State
