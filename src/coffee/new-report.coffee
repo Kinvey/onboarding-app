@@ -13,7 +13,7 @@ class NewReportCtrl extends Controller
       amount: @$scope.amount
       reason: @$scope.reason
     .then =>
-      @initialize()
+      @back()
 
   back: ->
     @$state.go 'reports', @$stateParams
