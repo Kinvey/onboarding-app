@@ -16,6 +16,9 @@ class SignedUpCtrl extends Controller
     @$scope.working = false
     @$scope.error = err
 
+  continue: ->
+    @$state.go 'budget', @$stateParams
+
     
 
 class SignedUpState extends State
