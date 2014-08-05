@@ -1,6 +1,6 @@
 class BudgetCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports',
+  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports'
 
   initialize: ->
 
