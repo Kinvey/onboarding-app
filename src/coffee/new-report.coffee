@@ -16,7 +16,7 @@ class NewReportCtrl extends Controller
       @back()
 
   back: ->
-    @$state.go 'reports', @$stateParams
+    @$state.go @$state.previous.name, @$state.previous.params
 
 
 

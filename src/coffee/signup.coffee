@@ -29,6 +29,7 @@ class SignupState extends State
 
   resolve:
     $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
+      console.log $stateParams
       $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
