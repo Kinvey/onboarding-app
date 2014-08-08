@@ -6,6 +6,15 @@ ul.list-unstyled
     .amount {{report.amount | currency:"$"}}
     .separator for
     .reason {{report.reason}}
+  li.oa-report.oa-footer
+    .from Total
+    .amount {{budget.total | currency:"$"}}
+    .separator in
+    .reason {{budget.count}}
+    .separator reports
+  li.oa-report.oa-footer
+    .from Budget
+    .amount {{budget.budget | currency:"$"}}
 .under-budget(ng-if="budget.underBudget") 
   | &#10004; Under Budget
 .over-budget(ng-if="!budget.underBudget") 

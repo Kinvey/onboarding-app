@@ -13,12 +13,13 @@ class BudgetCtrl extends Controller
 
     @$scope.$watch 'reports', =>
       @$kinvey.execute 'budget-check'
-      .then (budget) => @$scope.budget = budget
+      .then (budget) =>
+        @$scope.budget = budget
 
   nu: ->
     @$state.go 'new-report', @$stateParams
 
-    
+
 
   class BudgetState extends State
 
