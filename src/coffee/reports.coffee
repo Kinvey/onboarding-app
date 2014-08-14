@@ -1,3 +1,12 @@
+###
+Copyright (c) 2008-2014, Kinvey, Inc. All rights reserved.
+
+This software contains valuable confidential and proprietary information of
+KINVEY, INC and is subject to applicable licensing agreements.
+Unauthorized reproduction, transmission or distribution of this file and its
+contents is a violation of applicable laws.
+###
+
 class ReportsCtrl extends Controller
 
   @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports'
