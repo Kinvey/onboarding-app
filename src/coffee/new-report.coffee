@@ -32,7 +32,7 @@ class NewReportCtrl extends Controller
 class NewReportState extends State
 
   name: 'new-report'
-  url: '/new-report/?appKey&appSecret&host&origin'
+  url: '/new-report/?appKey&masterSecret&appSecret&host&origin'
   templateUrl: 'html/new-report.html'
   controller: NewReportCtrl
 
@@ -41,7 +41,8 @@ class NewReportState extends State
       $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
-        masterSecret: $stateParams.appSecret
+        masterSecret: $stateParams.masterSecret
+        appSecret: $stateParams.appSecret
     ]
 
 new NewReportState().register 'app'

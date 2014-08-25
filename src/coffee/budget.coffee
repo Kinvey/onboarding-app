@@ -33,7 +33,7 @@ class BudgetCtrl extends Controller
   class BudgetState extends State
 
     name: 'budget'
-    url: '/budget/?appKey&appSecret&host&origin'
+    url: '/budget/?appKey&appSecret&masterSecret&host&origin'
     templateUrl: 'html/budget.html'
     controller: BudgetCtrl
 
@@ -42,7 +42,8 @@ class BudgetCtrl extends Controller
         $kinvey.API_ENDPOINT = $stateParams.host
         $kinvey.init
           appKey: $stateParams.appKey
-          masterSecret: $stateParams.appSecret
+          masterSecret: $stateParams.masterSecret
+          appSecret: $stateParams.appSecret
       ]
 
       reports: ['$kinvey', '$k', ($kinvey) ->

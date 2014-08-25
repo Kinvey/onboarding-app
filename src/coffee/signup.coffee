@@ -32,7 +32,7 @@ class SignupCtrl extends Controller
 class SignupState extends State
 
   name: 'signup'
-  url: '/signup/?appKey&appSecret&host&origin'
+  url: '/signup/?appKey&appSecret&masterSecret&host&origin'
   templateUrl: 'html/signup.html'
   controller: SignupCtrl
 
@@ -42,6 +42,7 @@ class SignupState extends State
       $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
+        masterSecret: $stateParams.masterSecret
         appSecret: $stateParams.appSecret
       .then ->
         $kinvey.User.logout() if $kinvey.getActiveUser()?
