@@ -7,18 +7,23 @@ Unauthorized reproduction, transmission or distribution of this file and its
 contents is a violation of applicable laws.
 ###
 
-angular.module 'app', ['templates', 'ui.router', 'ui.bootstrap', 'kinvey']
+angular.module 'app', ['templates', 'ui.router', 'ui.bootstrap', 'kinvey',
+  'pubnub.angular.service']
 
   .config ['$urlRouterProvider',
     ($urlRouterProvider) ->
       $urlRouterProvider.otherwise '/'
     ]
 
-  .run ['$rootScope', '$state',
-    ($rootScope, $state) ->
+  .run ['$rootScope', '$state', 'PubNub',
+    ($rootScope, $state, PubNub) ->
       $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
         if fromState?
           $state.previous =
             name: fromState.name
             params: fromParams
+
+      PubNub.init
+        publish_key:'pub-c-f4f0e895-97a0-4546-ae67-1db67c68fbde',
+        subscribe_key:'sub-c-c6a507fc-796c-11e4-9114-02ee2ddab7fe',
   ]

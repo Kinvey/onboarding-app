@@ -9,7 +9,7 @@ contents is a violation of applicable laws.
 
 class ReportsCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports'
+  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports', 'PubNub'
 
   initialize: ->
 
@@ -19,6 +19,14 @@ class ReportsCtrl extends Controller
       @$kinvey.DataStore.find 'expense-reports'
       .then (reports) => @$scope.reports = reports
     ), 2000
+
+    @PubNub.ngSubscribe channel: @$stateParams.appKey
+
+    @$scope.$on @PubNub.ngMsgEv(@$stateParams.appKey), (event, payload) ->
+
+      if payload.message.type is 'new-report'
+        @$scope.reports.push payload.message.report
+
 
   nu: ->
     @$state.go 'new-report', @$stateParams

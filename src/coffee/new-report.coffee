@@ -9,7 +9,7 @@ contents is a violation of applicable laws.
 
 class NewReportCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey'
+  @inject '$scope', '$state', '$stateParams', '$kinvey', 'PubNub'
 
   initialize: ->
     @$scope.from = ''
@@ -17,15 +17,27 @@ class NewReportCtrl extends Controller
     @$scope.reason = ''
 
   save: ->
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'new-report-begin'
+
     @$kinvey.DataStore.save 'expense-reports',
       from: @$scope.from
       amount: @$scope.amount
       reason: @$scope.reason
-    .then =>
-      @back()
+    .then (report) =>
+
+      @PubNub.ngPublish
+        channel: @$stateParams.appKey
+        message:
+          type: 'new-report'
+          report: report
+
+      @$scope.back()
 
   back: ->
-    @$state.go @$state.previous.name, @$state.previous.params
+    @$state.go 'reports', @$stateParams
 
 
 
