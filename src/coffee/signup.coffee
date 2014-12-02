@@ -9,21 +9,39 @@ contents is a violation of applicable laws.
 
 class SignupCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey'
+  @inject '$scope', '$state', '$stateParams', '$kinvey', 'PubNub'
 
   signup: (username, password) ->
+
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'signup-begin'
+
     @$scope.working = true
     @$kinvey.User.signup
       username: username
       password: password
-    .then (=> @didSignup()), (error) => @failedSignup error
+    .then ((user)=> @didSignup user), (error) => @failedSignup error
 
-  didSignup: ->
+  didSignup: (user) ->
+
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'signup'
+        user: user
+
     @$scope.working = false
-    parent.postMessage (name: 'signedUp'), @$stateParams.origin
-    @$state.go 'signed-up', @$stateParams
+    @$state.go 'reports', @$stateParams
 
   failedSignup: (err) ->
+
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'signup-fail'
+
     @$scope.working = false
     @$scope.error = err
 
@@ -38,7 +56,6 @@ class SignupState extends State
 
   resolve:
     $k: ['$stateParams', '$kinvey', '$q', ($stateParams, $kinvey, $q) ->
-      console.log $stateParams
       $kinvey.API_ENDPOINT = $stateParams.host
       $kinvey.init
         appKey: $stateParams.appKey
