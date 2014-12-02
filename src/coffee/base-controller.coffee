@@ -26,3 +26,4 @@ class @Controller
       @$scope[key] = fn.bind?(@) || _.bind(fn, @)
 
     @initialize?()
+    

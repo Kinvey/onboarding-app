@@ -51,3 +51,4 @@ class BudgetCtrl extends Controller
       ]
 
   new BudgetState().register 'app'
+  

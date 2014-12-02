@@ -13,3 +13,4 @@ class @State
     (angular.module module).config ['$stateProvider', ($stateProvider) =>
       $stateProvider.state @name, @
     ]
+    
