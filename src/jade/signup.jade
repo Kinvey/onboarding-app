@@ -1,8 +1,9 @@
 h1.oa-page-header Sign Up
 form(role=form, ng-submit="signup(username,password)")
   .form-group
-    label(for="username") Username
+    label(for="username") Email
     input.form-control#username(name="Username", type="text", ng-model="username")
+    label.error(for="username", ng-if="badUsername") Enter a valid email address
   .form-group
     label(for="password") Password
     input.form-control#password(name="Password", type="password", ng-model="password")

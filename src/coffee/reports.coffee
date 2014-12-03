@@ -15,11 +15,6 @@ class ReportsCtrl extends Controller
 
     @$scope.reports = @reports
 
-    @$interval (=>
-      @$kinvey.DataStore.find 'expense-reports'
-      .then (reports) => @$scope.reports = reports
-    ), 2000
-
     @PubNub.ngSubscribe channel: @$stateParams.appKey
 
     @$scope.$on @PubNub.ngMsgEv(@$stateParams.appKey), (event, payload) ->
@@ -27,6 +22,26 @@ class ReportsCtrl extends Controller
       if payload.message.type is 'new-report'
         @$scope.reports.push payload.message.report
 
+  select: (report) ->
+    report.selected = not report.selected
+
+  approve: (report) ->
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'alert-begin'
+    promise = @$kinvey.execute 'approve',
+        report: report
+        user: @$kinvey.getActiveUser()
+    promise.then =>
+      @PubNub.ngPublish
+        channel: @$stateParams.appKey
+        message:
+          type: 'alert'
+
+
+  reject: (report) ->
+    @$kinvey.execute 'reject', report
 
   nu: ->
     @$state.go 'new-report', @$stateParams

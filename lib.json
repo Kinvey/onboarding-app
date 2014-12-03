@@ -3,7 +3,8 @@
         "<%= paths.build.base %>/<%= paths.lib.base %>/angular/angular.js",
         "<%= paths.build.base %>/<%= paths.lib.base %>/angular-ui-router/release/angular-ui-router.js",
         "<%= paths.build.base %>/<%= paths.lib.base %>/angular-bootstrap/ui-bootstrap-tpls.js",
-        "<%= paths.build.base %>/<%= paths.lib.base %>/pubnub-angular/lib/pubnub-angular.js"
+        "<%= paths.build.base %>/<%= paths.lib.base %>/pubnub-angular/lib/pubnub-angular.js",
+        "<%= paths.build.base %>/<%= paths.lib.base %>/validate/validate.js"
     ],
     "test": [
         "<%= paths.build.base %>/<%= paths.lib.base %>/angular/angular.js",

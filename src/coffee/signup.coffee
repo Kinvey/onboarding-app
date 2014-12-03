@@ -13,16 +13,20 @@ class SignupCtrl extends Controller
 
   signup: (username, password) ->
 
-    @PubNub.ngPublish
-      channel: @$stateParams.appKey
-      message:
-        type: 'signup-begin'
+    if validate username, { email: true }
+      @$scope.badUsername = true
 
-    @$scope.working = true
-    @$kinvey.User.signup
-      username: username
-      password: password
-    .then ((user)=> @didSignup user), (error) => @failedSignup error
+    else
+      @PubNub.ngPublish
+        channel: @$stateParams.appKey
+        message:
+          type: 'signup-begin'
+
+      @$scope.working = true
+      @$kinvey.User.signup
+        username: username
+        password: password
+      .then ((user)=> @didSignup user), (error) => @failedSignup error
 
   didSignup: (user) ->
 
