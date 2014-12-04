@@ -9,21 +9,36 @@ contents is a violation of applicable laws.
 
 class BudgetCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports'
+  @inject '$scope', '$state', '$stateParams', '$kinvey', '$interval', 'reports', 'PubNub'
 
   initialize: ->
 
     @$scope.reports = @reports
 
-    @$interval (=>
-      @$kinvey.DataStore.find 'expense-reports'
-      .then (reports) => @$scope.reports = reports
-    ), 2000
+    @PubNub.ngSubscribe channel: @$stateParams.appKey
 
-    @$scope.$watch 'reports', =>
-      @$kinvey.execute 'budget-check'
-      .then (budget) =>
-        @$scope.budget = budget
+    @$scope.$on @PubNub.ngMsgEv(@$stateParams.appKey), (event, payload) =>
+
+      if payload.message.type is 'script-saved'
+        @$scope.execute()
+
+      else if payload.message.type is 'new-report'
+        @$scope.reports.push payload.message.report
+        @$scope.execute()
+
+  execute: ->
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'execute-begin'
+    @$kinvey.execute 'budget-check'
+    .then (budget) =>
+      @$scope.budget = budget
+      @PubNub.ngPublish
+        channel: @$stateParams.appKey
+        message:
+          type: 'execute'
+          message: budget
 
   nu: ->
     @$state.go 'new-report', @$stateParams

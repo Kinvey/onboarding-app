@@ -17,7 +17,7 @@ class ReportsCtrl extends Controller
 
     @PubNub.ngSubscribe channel: @$stateParams.appKey
 
-    @$scope.$on @PubNub.ngMsgEv(@$stateParams.appKey), (event, payload) ->
+    @$scope.$on @PubNub.ngMsgEv(@$stateParams.appKey), (event, payload) =>
 
       if payload.message.type is 'new-report'
         @$scope.reports.push payload.message.report
@@ -34,7 +34,6 @@ class ReportsCtrl extends Controller
         report: report
         user: @$kinvey.getActiveUser()
     promise.then (result) =>
-      console.log result
       @PubNub.ngPublish
         channel: @$stateParams.appKey
         message:
