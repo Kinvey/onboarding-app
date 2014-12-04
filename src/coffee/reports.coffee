@@ -33,15 +33,29 @@ class ReportsCtrl extends Controller
     promise = @$kinvey.execute 'approve',
         report: report
         user: @$kinvey.getActiveUser()
-    promise.then =>
+    promise.then (result) =>
+      console.log result
       @PubNub.ngPublish
         channel: @$stateParams.appKey
         message:
           type: 'alert'
+          message: result.message
 
 
   reject: (report) ->
-    @$kinvey.execute 'reject', report
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'alert-begin'
+    promise = @$kinvey.execute 'reject',
+        report: report
+        user: @$kinvey.getActiveUser()
+    promise.then (result) =>
+      @PubNub.ngPublish
+        channel: @$stateParams.appKey
+        message:
+          type: 'alert'
+          message: result.message
 
   nu: ->
     @$state.go 'new-report', @$stateParams
