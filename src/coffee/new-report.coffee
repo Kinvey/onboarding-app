@@ -9,12 +9,13 @@ contents is a violation of applicable laws.
 
 class NewReportCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', 'PubNub'
+  @inject '$scope', '$stateParams', '$kinvey', 'PubNub'
 
   initialize: ->
-    @$scope.from = ''
     @$scope.amount = 0
-    @$scope.reason = ''
+    @$scope.reason = 'flights'
+
+    @PubNub.ngSubscribe channel: @$stateParams.appKey
 
   save: ->
     @PubNub.ngPublish
@@ -23,7 +24,6 @@ class NewReportCtrl extends Controller
         type: 'new-report-begin'
 
     @$kinvey.DataStore.save 'expense-reports',
-      from: @$scope.from
       amount: @$scope.amount
       reason: @$scope.reason
     .then (report) =>
@@ -34,10 +34,15 @@ class NewReportCtrl extends Controller
           type: 'new-report'
           report: report
 
-      @$scope.back()
+      if report.budget?
+        @$scope.underBudget = report.budget.underBudget
+        @$scope.overBudget = !report.budget.underBudget
 
-  back: ->
-    @$state.go 'reports', @$stateParams
+      @initialize()
+
+  selectReason: (reason) ->
+    console.log 'selectReason'
+    @$scope.reason = reason
 
 
 
@@ -56,5 +61,6 @@ class NewReportState extends State
         masterSecret: $stateParams.masterSecret
         appSecret: $stateParams.appSecret
     ]
+
 
 new NewReportState().register 'app'

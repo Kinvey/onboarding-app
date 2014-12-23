@@ -1,6 +1,6 @@
 {
   "name": "angular-grunt-seed",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "dependencies": {
     "angular": "~1.2.13",
     "angular-ui-router": "~0.2.9",

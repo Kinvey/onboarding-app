@@ -13,20 +13,16 @@ class SignupCtrl extends Controller
 
   signup: (username, password) ->
 
-    if validate username, { email: true }
-      @$scope.badUsername = true
+    @PubNub.ngPublish
+      channel: @$stateParams.appKey
+      message:
+        type: 'signup-begin'
 
-    else
-      @PubNub.ngPublish
-        channel: @$stateParams.appKey
-        message:
-          type: 'signup-begin'
-
-      @$scope.working = true
-      @$kinvey.User.signup
-        username: username
-        password: password
-      .then ((user)=> @didSignup user), (error) => @failedSignup error
+    @$scope.working = true
+    @$kinvey.User.signup
+      username: username
+      password: password
+    .then ((user)=> @didSignup user), (error) => @failedSignup error
 
   didSignup: (user) ->
 
@@ -37,7 +33,7 @@ class SignupCtrl extends Controller
         user: user
 
     @$scope.working = false
-    @$state.go 'reports', @$stateParams
+    @$state.go 'new-report', @$stateParams
 
   failedSignup: (err) ->
 

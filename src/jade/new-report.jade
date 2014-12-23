@@ -1,13 +1,18 @@
-.oa-header-btn.oa-back-btn(ng-click="back()") &larr;
-h1.oa-page-header New Expense Report
+h1.oa-page-header New Expense
+
 form(role=form, ng-submit="save()")
   .form-group
-    label(for="from") From
-    input.form-control#from(ng-model="from", type="text")
+    lavel(for="reason") Reason
+    select.form-control(name="reason", ng-model="reason") 
+      option(value="flights") Flights
+      option(value="hotels") Hotels
   .form-group
     label(for="amount") Amount
-    input.form-control#amount(ng-model="amount", type="number")
-  .form-group
-    label(for="reason") Reason
-    input.form-control#reason(ng-model="reason", type="text")
+    input.form-control#amount(ng-model="amount", type="text")
   button.btn.btn-success(type="submit") Save
+
+.under-budget(ng-if="underBudget") 
+  | &#10004; Under Budget
+.over-budget(ng-if="overBudget") 
+  | &#10007; Over Budget
+
