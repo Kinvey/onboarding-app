@@ -43,7 +43,7 @@ html
               firstScriptTag = document.getElementsByTagName('script')[0];
               pubnubScriptTag = document.createElement('script');
               pubnubScriptTag.id = 'pubnub-sdk';
-              pubnubScriptTag.src = "https://consoletest.kinvey.com/thirdparty/pubnub/pubnub.min.js";
+              pubnubScriptTag.src = "/thirdparty/pubnub/pubnub.min.js";
               firstScriptTag.parentNode.insertBefore(pubnubScriptTag, firstScriptTag);
               failedChecks = 0;
               waitFor = 10000;
