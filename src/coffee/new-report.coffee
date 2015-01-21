@@ -9,16 +9,18 @@ contents is a violation of applicable laws.
 
 class NewReportCtrl extends Controller
 
-  @inject '$scope', '$stateParams', '$kinvey', 'PubNub'
+  @inject '$scope', '$stateParams', '$kinvey'
 
   initialize: ->
     @$scope.amount = 0
     @$scope.reason = 'flights'
 
-    @PubNub.ngSubscribe channel: @$stateParams.appKey
+    PUBNUB.subscribe
+      channel: @$stateParams.appKey
+      message: ->
 
   save: ->
-    @PubNub.ngPublish
+    PUBNUB.publish
       channel: @$stateParams.appKey
       message:
         type: 'new-report-begin'
@@ -28,7 +30,7 @@ class NewReportCtrl extends Controller
       reason: @$scope.reason
     .then (report) =>
 
-      @PubNub.ngPublish
+      PUBNUB.publish
         channel: @$stateParams.appKey
         message:
           type: 'new-report'

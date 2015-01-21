@@ -9,11 +9,11 @@ contents is a violation of applicable laws.
 
 class SignupCtrl extends Controller
 
-  @inject '$scope', '$state', '$stateParams', '$kinvey', 'PubNub'
+  @inject '$scope', '$state', '$stateParams', '$kinvey'
 
   signup: (username, password) ->
 
-    @PubNub.ngPublish
+    PUBNUB.publish
       channel: @$stateParams.appKey
       message:
         type: 'signup-begin'
@@ -26,7 +26,7 @@ class SignupCtrl extends Controller
 
   didSignup: (user) ->
 
-    @PubNub.ngPublish
+    PUBNUB.publish
       channel: @$stateParams.appKey
       message:
         type: 'signup'
@@ -37,7 +37,7 @@ class SignupCtrl extends Controller
 
   failedSignup: (err) ->
 
-    @PubNub.ngPublish
+    PUBNUB.ngPublish
       channel: @$stateParams.appKey
       message:
         type: 'signup-fail'

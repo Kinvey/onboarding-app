@@ -1,5 +1,5 @@
 doctype html
-html(ng-app="app")
+html
   head
 
     meta(charset="utf8")
@@ -33,3 +33,39 @@ html(ng-app="app")
     //appjs start
     //appjs end
     //endbuild
+
+    script.
+        angular.element(document).ready(function() {
+          var loadPubnub;
+          if (typeof PUBNUB === "undefined" || PUBNUB === null) {
+            loadPubnub = function(callback) {
+              var checkForPubnub, checkInterval, failedChecks, firstScriptTag, pubnubScriptTag, waitFor;
+              firstScriptTag = document.getElementsByTagName('script')[0];
+              pubnubScriptTag = document.createElement('script');
+              pubnubScriptTag.id = 'pubnub-sdk';
+              pubnubScriptTag.src = "https://consoletest.kinvey.com/thirdparty/pubnub/pubnub.min.js";
+              firstScriptTag.parentNode.insertBefore(pubnubScriptTag, firstScriptTag);
+              failedChecks = 0;
+              waitFor = 10000;
+              checkInterval = 200;
+              return checkForPubnub = setInterval(function() {
+                failedChecks += 1;
+                if (typeof PUBNUB !== "undefined" && PUBNUB !== null) {
+                  clearInterval(checkForPubnub);
+                  return callback();
+                } else {
+                  if (failedChecks > (waitFor / checkInterval)) {
+                    throw new Error('Could not load PubNub by any means');
+                  }
+                }
+              }, checkInterval);
+            };
+          } else {
+            loadPubnub = function(callback) {
+              return callback();
+            };
+          }
+          return loadPubnub(function() {
+            return angular.bootstrap(document, ['app']);
+          });
+        });
