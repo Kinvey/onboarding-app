@@ -26,7 +26,7 @@ class NewReportCtrl extends Controller
         type: 'new-report-begin'
 
     @$kinvey.DataStore.save 'expense-reports',
-      amount: @$scope.amount
+      amount: Number(@$scope.amount)
       reason: @$scope.reason
     .then (report) =>
 
